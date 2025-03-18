@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qwer-app
+  namespace: qwer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: qwer-app
+  template:
+    metadata:
+      labels:
+        app: qwer-app
+    spec:
+      containers:
+        - name: jboss
+          image: default-route-openshift-image-registry.apps.ext2.mtp.local/qwer/eap74-openjdk17-openshift-rhel8:latest
+          ports:
+            - containerPort: 8080
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo "==== Removing HTTP to HTTPS redirection ===="
+              sed -i 's/redirect-socket="https"//g' /opt/eap/standalone/configuration/standalone-openshift.xml
+              
+              echo "==== Starting JBoss ===="
+              exec /opt/jboss/container/wildfly/s2i/run.sh
+

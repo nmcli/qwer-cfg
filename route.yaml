@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: qwer-route
+  namespace: qwer
+  labels:
+    type: sharded
+spec:
+  host: cys.qwer.com
+  to:
+    kind: Service
+    name: qwer-service
+  path: /
+  port:
+    targetPort: 8080
