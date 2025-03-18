@@ -15,19 +15,14 @@ spec:
     spec:
       containers:
         - name: jboss
-          image: default-route-openshift-image-registry.apps.ext2.mtp.local/qwer/eap74-openjdk17-openshift-rhel8:2025-03-19-08-44-14
+          image: default-route-openshift-image-registry.apps.ext2.mtp.local/qwer/eap74-openjdk17-openshift-rhel8:latest
           ports:
             - containerPort: 8080
-          volumeMounts:
-            - name: jboss-config-volume
-              mountPath: /opt/eap/standalone/configuration/standalone-openshift.xml
-              subPath: standalone-openshift.xml
           command: ["/bin/sh", "-c"]
           args:
             - |
+              echo "==== Removing HTTP to HTTPS redirection ===="
+              sed -i 's/redirect-socket="https"//g' /opt/eap/standalone/configuration/standalone-openshift.xml
+              
               echo "==== Starting JBoss ===="
               exec /opt/jboss/container/wildfly/s2i/run.sh
-      volumes:
-        - name: jboss-config-volume
-          configMap:
-            name: qwer-jboss-config
