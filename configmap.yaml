@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: qwer-jboss-config
+  namespace: qwer
+data:
+  standalone-openshift.xml: |
+    <?xml version="1.0" encoding="UTF-8"?>
+    <server xmlns="urn:jboss:domain:16.0">
+      <subsystem xmlns="urn:jboss:domain:web:10.0">
+        <connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http"/>
+      </subsystem>
+    </server>
