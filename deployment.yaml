@@ -15,14 +15,11 @@ spec:
     spec:
       containers:
         - name: jboss
-          image: default-route-openshift-image-registry.apps.ext2.mtp.local/qwer/eap8-openjdk17-builder-openshift-rhel8:2025-03-24-09-30-14
+          image: default-route-openshift-image-registry.apps.ext2.mtp.local/qwer/eap8-openjdk17-runtime-openshift-rhel8:latest
           ports:
             - containerPort: 8080
-#          command: ["/bin/sh", "-c"]
-#          args:
-#            - |
-#              echo "==== Removing HTTP to HTTPS redirection ===="
-#              sed -i 's/redirect-socket="https"//g' /opt/eap/standalone/configuration/standalone-openshift.xml
-#              
-#              echo "==== Starting JBoss ===="
-#              exec /opt/jboss/container/wildfly/s2i/run.sh
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo "==== Removing HTTP to HTTPS redirection ===="
+              sed -i 's/redirect-socket="https"//g' /opt/eap/standalone/configuration/standalone-openshift.xml
