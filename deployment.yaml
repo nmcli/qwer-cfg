@@ -18,8 +18,3 @@ spec:
           image: default-route-openshift-image-registry.apps.ext2.mtp.local/qwer/eap8-openjdk17-runtime-openshift-rhel8:2025-03-24-15-50-03
           ports:
             - containerPort: 8080
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              echo "==== Removing HTTP to HTTPS redirection ===="
-              sed -i 's/redirect-socket="https"//g' /opt/eap/standalone/configuration/standalone-openshift.xml
