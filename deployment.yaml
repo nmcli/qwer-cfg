@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: jboss
-          image: default-route-openshift-image-registry.apps.ext2.mtp.local/qwer/eap74-openjdk17-openshift-rhel8:2025-03-27-13-25-00
+          image: default-route-openshift-image-registry.apps.ext2.mtp.local/qwer/eap74-openjdk17-openshift-rhel8:2025-03-27-13-33-03
           ports:
             - containerPort: 8080
